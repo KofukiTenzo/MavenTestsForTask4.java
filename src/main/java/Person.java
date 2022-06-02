@@ -14,19 +14,26 @@ public class Person extends IncorrectUsernameException {
         this.age = age;
     }
 
-    protected String getFullName() {
+    protected String getFullName() throws Exception {
         String fullName = "";
-        try {
-            if (firstName.equals("") || name.equals("") || lastName.equals("")) throw new IncorrectUsernameException();
-            else fullName  = firstName + " " + name + " " + lastName;
-        } catch (IncorrectUsernameException e) {
-            e.printStackTrace();
-        }
+
+        if(getFirstName() != ""){
+            fullName += getFirstName() + " ";
+        }else throw new IncorrectUsernameException("Incorrect name enter!");
+
+        if(getName() != ""){
+            fullName += getName() + " ";
+        }else throw new IncorrectUsernameException("Incorrect name enter!");
+
+        if(getLastName() != ""){
+            fullName += getLastName();
+        }else throw new IncorrectUsernameException("Incorrect name enter!");
+
         return fullName;
     }
 
     protected boolean isAdult(Person p) {
-        return p.getAge() > 21;
+        return p.getAge() >= 21;
     }
 
     public String getFirstName() {
